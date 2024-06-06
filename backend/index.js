@@ -9,6 +9,7 @@ const app = express();
 
 const authRoute = require("./routes/auth.route");
 const userRoute = require("./routes/user.route");
+const tweetRoute = require("./routes/tweet.route");
 
 // Middlewares
 app.use(cors());
@@ -34,6 +35,7 @@ cloudinary.config({
 // Routes
 app.use("/api/auth", authRoute);
 app.use("/api/user", userRoute);
+app.use("/api/tweet", tweetRoute);
 
 // Server
 app.listen(process.env.PORT, () => {

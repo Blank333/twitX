@@ -42,7 +42,10 @@ exports.getOne = (req, res) => {
   const { id } = req.params;
   //Remove password from returned user
   User.findById(id, { password: 0 })
-    .populate("following followers")
+    .populate({
+      path: "following followers",
+      select: "-password",
+    })
     .then((user) => {
       if (!user) return res.status(404).json({ error: "User not found" });
       return res.status(200).json({ message: user });
@@ -82,7 +85,7 @@ exports.follow = (req, res) => {
               userToFollow
                 .save()
                 .then(() => {
-                  return res.status(200).json({ message: "User has been followed successfuly!", success: true });
+                  return res.status(200).json({ message: "User has been followed successfuly!" });
                 })
                 .catch((err) => {
                   return res.status(500).json({ error: `Server Error ${err}` });
@@ -135,7 +138,7 @@ exports.unfollow = (req, res) => {
               userToUnfollow
                 .save()
                 .then(() => {
-                  return res.status(200).json({ message: "User has been unfollowed successfuly!", success: true });
+                  return res.status(200).json({ message: "User has been unfollowed successfuly!" });
                 })
                 .catch((err) => {
                   return res.status(500).json({ error: `Server Error ${err}` });

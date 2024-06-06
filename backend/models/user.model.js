@@ -36,11 +36,9 @@ const userSchema = mongoose.Schema(
     },
     location: {
       type: String,
-      default: "",
     },
     dateOfBirth: {
       type: Date,
-      default: "",
     },
     followers: {
       type: [ObjectId],
