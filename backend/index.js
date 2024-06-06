@@ -7,6 +7,9 @@ require("dotenv").config();
 const cors = require("cors");
 const app = express();
 
+const authRoute = require("./routes/auth.route");
+const userRoute = require("./routes/user.route");
+
 // Middlewares
 app.use(cors());
 app.use(express.json());
@@ -29,6 +32,8 @@ cloudinary.config({
 });
 
 // Routes
+app.use("/api/auth", authRoute);
+app.use("/api/user", userRoute);
 
 // Server
 app.listen(process.env.PORT, () => {
