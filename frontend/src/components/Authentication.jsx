@@ -1,11 +1,9 @@
-import { Button, Col, Container, Form, Row } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faComments } from "@fortawesome/free-solid-svg-icons";
+import { Button, Col, Container, Form, Image, Row } from "react-bootstrap";
 import "./Authentication.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
-
+import logo from "../assets/logo.png";
 function Authentication({ sideMessage, action, handleAction }) {
   const [formInfo, setFormInfo] = useState({
     name: "",
@@ -56,8 +54,10 @@ function Authentication({ sideMessage, action, handleAction }) {
           md={5}
           className='bg-main text-white d-flex flex-column justify-content-center align-items-center border-custom'
         >
-          <h3>{sideMessage}</h3>
-          <FontAwesomeIcon icon={faComments} className='font-custom' />
+          <div className='d-flex flex-column justify-content-center align-items-center text-center gap-4'>
+            <h3>{sideMessage}</h3>
+            <Image src={logo} alt='logo' fluid className='logo' />
+          </div>
         </Col>
         <Col sm={12} md={6} className='d-flex flex-column justify-content-center ps-5 gap-3 '>
           {action === "Login" ? (

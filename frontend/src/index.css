@@ -3,8 +3,9 @@
 
 /* Variables */
 :root {
-  --var-main-color: hsl(204, 87%, 52%);
-  --var-hover-color: hsl(204, 88%, 39%);
+  --var-main-color: rgb(26, 154, 239);
+  --var-hover-color: rgb(12, 117, 187);
+  --var-lighthover-color: rgb(212, 236, 254);
 }
 
 /* Helper classes */
@@ -25,6 +26,11 @@
   box-sizing: border-box;
   font-family: Poppins, Arial, Helvetica, sans-serif;
 }
+
+body {
+  margin: 0 200px !important;
+}
+
 .form-control:focus {
   box-shadow: none !important;
 }

@@ -1,0 +1,10 @@
+.profile-picture {
+  width: 60px !important;
+  height: 60px !important;
+  border-radius: 50%;
+}
+
+.active,
+.nav-link:hover {
+  background-color: var(--var-lighthover-color) !important;
+}

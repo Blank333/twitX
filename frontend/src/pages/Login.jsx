@@ -21,7 +21,7 @@ function Login() {
   };
   return (
     <div className='vh-100 d-flex justify-content-center align-items-center bg-secondary-subtle'>
-      <Authentication sideMessage='Welcome Back' action='Login' handleAction={handleLogin} />;
+      <Authentication sideMessage='Welcome Back' action='Login' handleAction={handleLogin} />
     </div>
   );
 }
