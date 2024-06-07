@@ -1,0 +1,19 @@
+.tweet {
+  width: 95% !important;
+}
+
+.content-media {
+  max-width: 90%;
+}
+
+.delete-tweet {
+  visibility: hidden;
+}
+
+.tweet:hover .delete-tweet {
+  visibility: visible;
+}
+
+.tweet-user:hover {
+  text-decoration: underline;
+}

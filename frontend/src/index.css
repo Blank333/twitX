@@ -6,6 +6,7 @@
   --var-main-color: rgb(26, 154, 239);
   --var-hover-color: rgb(12, 117, 187);
   --var-lighthover-color: rgb(212, 236, 254);
+  --var-normalhover-color: rgb(167, 210, 248);
 }
 
 /* Helper classes */
@@ -14,6 +15,13 @@
 }
 .bg-hover:hover {
   background-color: var(--var-hover-color) !important;
+  color: white !important;
+}
+.bg-lighthover:hover {
+  background-color: var(--var-lighthover-color) !important;
+}
+.bg-normalhover:hover {
+  background-color: var(--var-normalhover-color) !important;
 }
 .color-main {
   color: var(--var-main-color) !important;
@@ -24,10 +32,12 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: Poppins, Arial, Helvetica, sans-serif;
+  font-family: Poppins, Arial, Helvetica, sans-serif !important;
 }
-
-body {
+p {
+  margin: 0 !important;
+}
+.home {
   margin: 0 200px !important;
 }
 
