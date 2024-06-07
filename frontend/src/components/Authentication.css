@@ -1,0 +1,36 @@
+.width-custom {
+  width: 75% !important;
+}
+
+.font-custom {
+  font-size: 6rem !important;
+}
+
+.border-custom {
+  border-radius: 1rem 0 0 1rem !important;
+}
+/* Small screen */
+@media screen and (max-width: 768px) {
+  .width-custom {
+    width: 80% !important;
+  }
+
+  .border-custom {
+    border-radius: 1rem 1rem 0 0 !important;
+  }
+
+  .font-custom {
+    font-size: 2rem !important;
+  }
+}
+
+/* Medium screen */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .width-custom {
+    width: 80% !important;
+  }
+
+  .font-custom {
+    font-size: 4rem !important;
+  }
+}
