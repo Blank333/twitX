@@ -23,6 +23,7 @@ function Profile() {
   const [tweets, setTweets] = useState([]);
   const token = localStorage.getItem("token");
   const [loading, setLoading] = useState(false);
+  const [loadingUser, setLoadingUser] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
   const [showUpload, setShowUpload] = useState(false);
   const [showFollows, setShowFollows] = useState(false);
@@ -31,6 +32,7 @@ function Profile() {
 
   useEffect(() => {
     setLoading(true);
+    setLoadingUser(true);
     // Fetch user profile
     axios
       .get(`${import.meta.env.VITE_API_URL}/user/${username}`, { headers: { Authorization: token } })
@@ -42,6 +44,9 @@ function Profile() {
         setTimeout(() => {
           window.location.href = "/";
         }, 3000);
+      })
+      .finally(() => {
+        setLoadingUser(false);
       });
 
     // Fetch user tweets
@@ -101,7 +106,7 @@ function Profile() {
       </Row>
       {/* User image */}
       <Row className='bg-main profile-header position-relative'>
-        {!profileInfo.profilePicURL ? (
+        {loadingUser ? (
           <Placeholder as='image' animation='glow'>
             <Placeholder xs={12} className='user-profile-picture' />
           </Placeholder>
@@ -116,7 +121,7 @@ function Profile() {
 
       {/* Actions */}
       <div className='d-flex justify-content-end align-items-end py-3 profile-info'>
-        {!loading ? (
+        {!loadingUser ? (
           // When visint other profiles
           userInfo._id !== profileInfo._id ? (
             userInfo.following.find((userId) => userId === profileInfo._id) ? (
@@ -129,30 +134,33 @@ function Profile() {
               </Button>
             )
           ) : (
-            // When on own profile
-            <div className='d-flex flex-column flex-md-row gap-3'>
-              {/* Upload Profile Picture */}
-              <Button className='bg-clear bg-hover' onClick={() => setShowUpload(true)}>
-                Upload Profile Photo
-              </Button>
-              <UploadPicModal
-                show={showUpload}
-                onHide={() => setShowUpload(false)}
-                userInfo={profileInfo}
-                setUserInfo={setProfileInfo}
-              />
+            userInfo._id ==
+            profileInfo._id(
+              // When on own profile
+              <div className='d-flex flex-column flex-md-row gap-3'>
+                {/* Upload Profile Picture */}
+                <Button className='bg-clear bg-hover' onClick={() => setShowUpload(true)}>
+                  Upload Profile Photo
+                </Button>
+                <UploadPicModal
+                  show={showUpload}
+                  onHide={() => setShowUpload(false)}
+                  userInfo={profileInfo}
+                  setUserInfo={setProfileInfo}
+                />
 
-              {/* Edit Profile Information */}
-              <Button className='bg-clear bg-hover' onClick={() => setShowEdit(true)}>
-                Edit Profile
-              </Button>
-              <EditProfileModal
-                show={showEdit}
-                onHide={() => setShowEdit(false)}
-                userInfo={profileInfo}
-                setUserInfo={setProfileInfo}
-              />
-            </div>
+                {/* Edit Profile Information */}
+                <Button className='bg-clear bg-hover' onClick={() => setShowEdit(true)}>
+                  Edit Profile
+                </Button>
+                <EditProfileModal
+                  show={showEdit}
+                  onHide={() => setShowEdit(false)}
+                  userInfo={profileInfo}
+                  setUserInfo={setProfileInfo}
+                />
+              </div>
+            )
           )
         ) : (
           <Placeholder as='button' animation='glow' className='bg-main bg-hover border-0 rounded p-1 text-white'>
@@ -163,7 +171,7 @@ function Profile() {
 
       {/* User name */}
       <Row>
-        {!profileInfo.profilePicURL ? (
+        {loadingUser ? (
           <Placeholder as='div' animation='glow' className='d-flex flex-column gap-3' />
         ) : (
           <Col>
@@ -174,7 +182,7 @@ function Profile() {
       </Row>
 
       {/* User Information */}
-      {profileInfo.username && (
+      {!loadingUser && (
         <>
           <Row className='my-3'>
             <Col md={5} className='d-flex flex-column gap-2'>
