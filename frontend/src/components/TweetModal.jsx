@@ -4,13 +4,16 @@ import axios from "axios";
 import { useState } from "react";
 import { Button, Form, Image, Modal } from "react-bootstrap";
 import { toast } from "react-toastify";
+import StyledLoading from "./StyledLoading";
 
 function TweetModal({ show = false, onHide, id = null }) {
   const [content, setContent] = useState();
   const [image, setImage] = useState();
   const token = localStorage.getItem("token");
+  const [loading, setLoading] = useState(false);
 
   const handleTweet = () => {
+    setLoading(true);
     if (!content) return toast.error("Please provide tweet content!");
     const formdata = new FormData();
     formdata.append("image", image);
@@ -28,6 +31,9 @@ function TweetModal({ show = false, onHide, id = null }) {
         })
         .catch((err) => {
           toast.error(err?.response?.data?.error);
+        })
+        .finally(() => {
+          setLoading(false);
         });
     } else {
       axios
@@ -40,6 +46,9 @@ function TweetModal({ show = false, onHide, id = null }) {
         })
         .catch((err) => {
           toast.error(err?.response?.data?.error);
+        })
+        .finally(() => {
+          setLoading(false);
         });
     }
   };
@@ -57,6 +66,7 @@ function TweetModal({ show = false, onHide, id = null }) {
         <Modal.Title>{show}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
+        {loading && <StyledLoading />}
         <Form>
           <Form.Group className='mb-3'>
             <Form.Control

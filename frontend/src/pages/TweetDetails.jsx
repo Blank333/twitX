@@ -37,7 +37,7 @@ function TweetDetails() {
     <Container className='border-start border-end h-100'>
       <Row className='border-bottom py-2 position-sticky start-0 top-0 bg-white d-flex align-items-center'>
         <Col>
-          <h5>Home</h5>
+          <h5>Tweet</h5>
         </Col>
         <Col className='d-flex justify-content-end '></Col>
       </Row>
@@ -48,8 +48,8 @@ function TweetDetails() {
           {tweet && <Tweets tweets={tweet} setTweets={setTweet} setReply={setShow} setTweetId={setTweetId} />}
 
           {replies && (
-            <div className='px-5'>
-              <h3>Replies</h3>
+            <div className='px-3 mt-2'>
+              <h5>Replies</h5>
               <Tweets tweets={replies} setTweets={setReplies} setReply={setShow} setTweetId={setTweetId} />
             </div>
           )}

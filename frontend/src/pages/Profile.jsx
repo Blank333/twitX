@@ -13,6 +13,7 @@ import noTweets from "../assets/noTweets.png";
 import { updateFollowing } from "../redux/slices/userSlice";
 import EditProfileModal from "../components/EditProfileModal";
 import UploadPicModal from "../components/UploadPicModal";
+import FollowsModal from "../components/FollowsModal";
 
 function Profile() {
   const userInfo = useSelector((state) => state.user);
@@ -23,6 +24,7 @@ function Profile() {
   const [loading, setLoading] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
   const [showUpload, setShowUpload] = useState(false);
+  const [showFollows, setShowFollows] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -180,9 +182,19 @@ function Profile() {
             </Col>
           </Row>
           <Row>
-            <Col className='d-flex gap-3'>
-              <h6>{profileInfo.following.length} Following</h6>
-              <h6>{profileInfo.followers.length} Followers</h6>
+            <Col className='d-flex gap-3 align-items-center'>
+              <Button variant='clear' onClick={() => setShowFollows("Following")}>
+                <h6>{profileInfo.following.length} Following</h6>
+              </Button>
+              <Button variant='clear' onClick={() => setShowFollows("Followers")}>
+                <h6>{profileInfo.followers.length} Followers</h6>
+              </Button>
+              <FollowsModal
+                show={showFollows}
+                followers={profileInfo.followers}
+                following={profileInfo.following}
+                onHide={() => setShowFollows(false)}
+              />
             </Col>
           </Row>
         </>

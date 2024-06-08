@@ -1,7 +1,7 @@
 import { Button, Image } from "react-bootstrap";
 import "./Tweet.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faRetweet, faHeart } from "@fortawesome/free-solid-svg-icons";
+import { faRetweet, faHeart, faCircle } from "@fortawesome/free-solid-svg-icons";
 import {
   faHeart as faHeaderRegular,
   faMessage as faMessageRegular,
@@ -57,10 +57,15 @@ function Tweet({ tweet, handleLike, handleUnlike, handleRetweet, handleReply, ha
         <div className='d-flex justify-content-between '>
           <Link
             to={`/${tweet.tweetedBy.username}`}
-            className='d-flex flex-column flex-md-row gap-0 gap-md-2  text-decoration-none text-dark'
+            className='d-flex flex-column flex-md-row gap-0 gap-md-2 align-items-md-center text-decoration-none text-dark'
           >
             <p className='tweet-user fw-bold'>{tweet.tweetedBy.name}</p>
             <p className='text-secondary '>@{tweet.tweetedBy.username}</p>
+            <FontAwesomeIcon
+              icon={faCircle}
+              className='text-secondary d-none d-md-block'
+              style={{ fontSize: "0.3rem" }}
+            />
             <p className='text-secondary'>{new Date(tweet.createdAt).toUTCString().split(" ").slice(0, 4).join(" ")}</p>
           </Link>
           {userInfo._id === tweet.tweetedBy._id && (
