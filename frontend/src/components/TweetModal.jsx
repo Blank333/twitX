@@ -11,6 +11,7 @@ function TweetModal({ show = false, onHide, id = null }) {
   const token = localStorage.getItem("token");
 
   const handleTweet = () => {
+    if (!content) return toast.error("Please provide tweet content!");
     const formdata = new FormData();
     formdata.append("image", image);
     formdata.append("content", content);

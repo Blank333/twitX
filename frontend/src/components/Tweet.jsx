@@ -71,10 +71,12 @@ function Tweet({ tweet, handleLike, handleUnlike, handleRetweet, handleReply, ha
         </div>
 
         {/* Content */}
-        <div className='d-flex flex-column gap-2'>
-          <p>{tweet.content}</p>
-          {tweet.imageURL && <Image src={tweet.imageURL} alt='content media' className='content-media' />}
-        </div>
+        <Link to={`/tweet/${tweet._id}`} className='text-decoration-none text-dark'>
+          <div className='d-flex flex-column gap-2'>
+            <p>{tweet.content}</p>
+            {tweet.imageURL && <Image src={tweet.imageURL} alt='content media' className='content-media' />}
+          </div>
+        </Link>
 
         {/* Likes/Retweets*/}
         <div className='d-flex gap-4'>

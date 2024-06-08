@@ -4,6 +4,7 @@ import Login from "./pages/Login";
 import Regsiter from "./pages/Register";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
+import TweetDetails from "./pages/TweetDetails";
 
 const router = createBrowserRouter([
   {
@@ -11,12 +12,16 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        path: "/",
+        path: "",
         element: <Home />,
       },
       {
         path: "/:username",
         element: <Profile />,
+      },
+      {
+        path: "/tweet/:id",
+        element: <TweetDetails />,
       },
     ],
   },

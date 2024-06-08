@@ -5,14 +5,17 @@ import TweetModal from "../components/TweetModal";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import StyledLoading from "../components/StyledLoading";
 function Home() {
   const [show, setShow] = useState(false);
   const [tweets, setTweets] = useState([]);
   const [tweetId, setTweetId] = useState();
+  const [loading, setLoading] = useState(false);
 
   const token = localStorage.getItem("token");
 
   useEffect(() => {
+    setLoading(true);
     axios
       .get(`${import.meta.env.VITE_API_URL}/tweet`, { headers: { Authorization: token } })
       .then((res) => {
@@ -20,6 +23,9 @@ function Home() {
       })
       .catch((err) => {
         toast.error(err?.response?.data?.error);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, []);
 
@@ -35,7 +41,11 @@ function Home() {
           </Button>
         </Col>
       </Row>
-      <Tweets tweets={tweets} setTweets={setTweets} setReply={setShow} setTweetId={setTweetId} />
+      {loading ? (
+        <StyledLoading />
+      ) : (
+        <Tweets tweets={tweets} setTweets={setTweets} setReply={setShow} setTweetId={setTweetId} />
+      )}
 
       <TweetModal onHide={() => setShow(false)} show={show} id={tweetId} />
     </Container>

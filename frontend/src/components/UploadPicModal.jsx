@@ -2,12 +2,16 @@ import axios from "axios";
 import { useState } from "react";
 import { Button, Form, Image, Modal } from "react-bootstrap";
 import { toast } from "react-toastify";
+import StyledLoading from "./StyledLoading";
 
 function UploadPicModal({ show, onHide, userInfo, setUserInfo }) {
   const token = localStorage.getItem("token");
   const [image, setImage] = useState();
+  const [loading, setLoading] = useState(false);
 
   const handleUpload = (e) => {
+    if (!image) return toast.error("Please provide an image!");
+    setLoading(true);
     // Attach image to form data for multer
     const formData = new FormData();
     formData.append("image", image);
@@ -30,6 +34,9 @@ function UploadPicModal({ show, onHide, userInfo, setUserInfo }) {
       })
       .catch((err) => {
         toast.error(err?.response?.data?.error);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
@@ -45,6 +52,7 @@ function UploadPicModal({ show, onHide, userInfo, setUserInfo }) {
         <Modal.Title>Upload Profile Picture</Modal.Title>
       </Modal.Header>
       <Modal.Body>
+        {loading && <StyledLoading />}
         <Form>
           <Form.Group className='mb-3'>
             <Form.Label className='bg-lightmain color-main border border-primary-subtle px-3 py-2 w-100 rounded'>

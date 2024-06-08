@@ -2,9 +2,11 @@ import axios from "axios";
 import { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { toast } from "react-toastify";
+import StyledLoading from "./StyledLoading";
 
 function EditProfileModal({ show, onHide, userInfo, setUserInfo }) {
   const token = localStorage.getItem("token");
+  const [loading, setLoading] = useState(false);
 
   const [formInfo, setFormInfo] = useState({
     name: userInfo.name,
@@ -14,6 +16,11 @@ function EditProfileModal({ show, onHide, userInfo, setUserInfo }) {
 
   const handleEdit = (e) => {
     e.preventDefault();
+    if (!formInfo.name || !formInfo.location || !formInfo.dateOfBirth) {
+      return toast.error("Fill all fields before saving!");
+    }
+    setLoading(true);
+
     axios
       .put(
         `${import.meta.env.VITE_API_URL}/user/${userInfo._id}`,
@@ -31,6 +38,9 @@ function EditProfileModal({ show, onHide, userInfo, setUserInfo }) {
       })
       .catch((err) => {
         toast.error(err?.response?.data?.error);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
@@ -45,6 +55,7 @@ function EditProfileModal({ show, onHide, userInfo, setUserInfo }) {
         <Modal.Title>Edit Profile</Modal.Title>
       </Modal.Header>
       <Modal.Body>
+        {loading && <StyledLoading />}
         <Form>
           <Form.Group className='mb-3'>
             <Form.Label>Name</Form.Label>
@@ -52,7 +63,7 @@ function EditProfileModal({ show, onHide, userInfo, setUserInfo }) {
           </Form.Group>
           <Form.Group className='mb-3'>
             <Form.Label>Location</Form.Label>
-            <Form.Control type='text' id='location' value={formInfo.location} onChange={handleChange} />
+            <Form.Control type='text' id='location' value={formInfo.location} onChange={handleChange} required />
           </Form.Group>
           <Form.Group className='mb-3'>
             <Form.Label>Date of Birth</Form.Label>
