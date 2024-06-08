@@ -33,7 +33,7 @@ function FollowsModal({ show = false, onHide, followers = [], following = [] }) 
               key={follow._id}
               className='text-decoration-none text-dark d-flex justify-content-start gap-4 align-items-center rounded-5 bg-lighthover p-2'
             >
-              <Image src={follow.profilePicURL} alt='profile picture' className='profile-picture' />
+              <Image src={follow.profilePicURL || defaultProfile} alt='profile picture' className='profile-picture' />
               <div>
                 <p>{follow.name}</p>
                 <p className='text-secondary'>@{follow.username}</p>

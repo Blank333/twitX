@@ -9,6 +9,7 @@ import {
 } from "@fortawesome/free-regular-svg-icons";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import defaultProfile from "../assets/defaultProfile.jpg";
 
 function Tweet({ tweet, handleLike, handleUnlike, handleRetweet, handleReply, handleDelete }) {
   const userInfo = useSelector((state) => state.user);
@@ -44,7 +45,11 @@ function Tweet({ tweet, handleLike, handleUnlike, handleRetweet, handleReply, ha
     <div className='d-flex gap-2 border py-2 tweet m-auto bg-lighthover '>
       {/* User profile picture */}
       <div>
-        <Image src={tweet.tweetedBy.profilePicURL} alt='profile picture' className='profile-picture object-fit-cover' />
+        <Image
+          src={tweet.tweetedBy.profilePicURL || defaultProfile}
+          alt='profile picture'
+          className='profile-picture object-fit-cover'
+        />
       </div>
       {/* Tweet */}
       <div className='d-flex flex-column gap-1 w-100'>

@@ -14,6 +14,7 @@ import { updateFollowing } from "../redux/slices/userSlice";
 import EditProfileModal from "../components/EditProfileModal";
 import UploadPicModal from "../components/UploadPicModal";
 import FollowsModal from "../components/FollowsModal";
+import defaultProfile from "../assets/defaultProfile.jpg";
 
 function Profile() {
   const userInfo = useSelector((state) => state.user);
@@ -105,7 +106,11 @@ function Profile() {
             <Placeholder xs={12} className='user-profile-picture' />
           </Placeholder>
         ) : (
-          <Image src={profileInfo.profilePicURL} alt='profile picture' className='user-profile-picture  ' />
+          <Image
+            src={profileInfo.profilePicURL || defaultProfile}
+            alt='profile picture'
+            className='user-profile-picture  '
+          />
         )}
       </Row>
 

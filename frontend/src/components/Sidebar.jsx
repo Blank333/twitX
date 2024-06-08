@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../redux/slices/userSlice";
+import defaultProfile from "../assets/defaultProfile.jpg";
 
 function Sidebar() {
   const [show, setShow] = useState(false);
@@ -67,7 +68,11 @@ function Sidebar() {
           </Nav>
         </div>
         <Link to={`/${userInfo.username}`} className='d-flex gap-3 nav-link rounded-5 py-1 px-2'>
-          <Image src={userInfo.profilePicURL} alt='profile picture' className='profile-picture object-fit-cover' />
+          <Image
+            src={userInfo.profilePicURL || defaultProfile}
+            alt='profile picture'
+            className='profile-picture object-fit-cover'
+          />
           <div className='d-flex flex-column justify-content-center'>
             <p className='fs-5'>{userInfo.name}</p>
             <p className='text-secondary'>@{userInfo.username}</p>
@@ -80,7 +85,11 @@ function Sidebar() {
         <Row>
           <Col xs={5}>
             <Button className='border-0 p-0' variant='clear' onClick={() => setShow(true)}>
-              <Image src={userInfo.profilePicURL} alt='profile picture' className='profile-picture object-fit-cover ' />
+              <Image
+                src={userInfo.profilePicURL || defaultProfile}
+                alt='profile picture'
+                className='profile-picture object-fit-cover '
+              />
             </Button>
           </Col>
           <Col>
@@ -102,7 +111,7 @@ function Sidebar() {
                   onClick={() => setShow(false)}
                 >
                   <Image
-                    src={userInfo.profilePicURL}
+                    src={userInfo.profilePicURL || defaultProfile}
                     alt='profile picture'
                     className='profile-picture object-fit-cover'
                   />

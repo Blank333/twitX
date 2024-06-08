@@ -31,7 +31,6 @@ const userSchema = mongoose.Schema(
     },
     profilePicURL: {
       type: String,
-      default: "https://res.cloudinary.com/djpawrjb6/image/upload/v1717855945/defaultProfile_mtvzx8.jpg",
     },
     location: {
       type: String,
