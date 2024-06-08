@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button, Image, Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import defaultProfile from "../assets/defaultProfile.jpg";
 
 function FollowsModal({ show = false, onHide, followers = [], following = [] }) {
   const [data, setData] = useState([]);

@@ -31,6 +31,7 @@ function TweetModal({ show = false, onHide, id = null }) {
           setContent();
           setImage();
           id = null;
+          window.location.reload();
         })
         .catch((err) => {
           toast.error(err?.response?.data?.error);
@@ -46,6 +47,7 @@ function TweetModal({ show = false, onHide, id = null }) {
           onHide();
           setContent();
           setImage();
+          window.location.reload();
         })
         .catch((err) => {
           toast.error(err?.response?.data?.error);
