@@ -39,9 +39,9 @@ exports.getAll = (req, res) => {
 
 //Get one user
 exports.getOne = (req, res) => {
-  const { id } = req.params;
+  const { username } = req.params;
   //Remove password from returned user
-  User.findById(id, { password: 0 })
+  User.findOne({ username: username }, { password: 0 })
     .populate({
       path: "following followers",
       select: "-password",
@@ -199,13 +199,21 @@ exports.uploadImage = (req, res) => {
   cloudinary.uploader
     .upload(image.path, options)
     .then((data) => {
+      if (user.profilePicURL) {
+        // Get the file name without the extension
+        const cloudinaryId = user.profilePicURL.split("/").pop().split(".")[0];
+        // Delete the previous image from cloudinary
+        cloudinary.uploader.destroy(cloudinaryId).catch((err) => {
+          console.log(err);
+        });
+      }
       User.findByIdAndUpdate(
         user,
         { profilePicURL: data.secure_url },
         { projection: { password: 0 }, new: true, runValidators: true }
       )
         .then(() => {
-          return res.status(200).json({ message: `Profile picture updated!` });
+          return res.status(200).json({ message: `Profile picture updated!`, profilePicURL: data.secure_url });
         })
         .catch((err) => {
           return res.status(500).json({ error: `Server Error ${err}` });

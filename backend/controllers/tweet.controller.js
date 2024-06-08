@@ -3,6 +3,7 @@ const Tweet = require("../models/tweet.model");
 //For handling file upload
 const cloudinary = require("cloudinary").v2;
 const fs = require("fs");
+const User = require("../models/user.model");
 
 // Create new tweet
 exports.create = (req, res) => {
@@ -101,20 +102,45 @@ exports.create = (req, res) => {
 
 // Fetch all tweets
 exports.getAll = (req, res) => {
+  const { username } = req.params;
   // Sort all tweets in descending order according to creation date
   // Populate and remove password
-  Tweet.find()
-    .sort({ createdAt: -1 })
-    .populate({
-      path: "replies likes retweetBy tweetedBy",
-      select: "-password",
-    })
-    .then((data) => {
-      return res.status(200).json({ message: data });
-    })
-    .catch((err) => {
-      return res.status(500).json({ error: `Server Error ${err}` });
-    });
+
+  if (username) {
+    // If finding for specific user
+    User.findOne({ username: username })
+      .then((user) => {
+        Tweet.find({ tweetedBy: user })
+          .sort({ createdAt: -1 })
+          .populate({
+            path: "replies likes retweetBy tweetedBy",
+            select: "-password",
+          })
+          .then((data) => {
+            return res.status(200).json({ message: data });
+          })
+          .catch((err) => {
+            return res.status(500).json({ error: `Server Error ${err}` });
+          });
+      })
+      .catch((err) => {
+        return res.status(500).json({ error: `Server Error ${err}` });
+      });
+  } else {
+    // Find all tweets
+    Tweet.find()
+      .sort({ createdAt: -1 })
+      .populate({
+        path: "replies likes retweetBy tweetedBy",
+        select: "-password",
+      })
+      .then((data) => {
+        return res.status(200).json({ message: data });
+      })
+      .catch((err) => {
+        return res.status(500).json({ error: `Server Error ${err}` });
+      });
+  }
 };
 
 // Fetch one tweet

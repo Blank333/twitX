@@ -1,11 +1,14 @@
 const express = require("express");
 const router = express.Router();
 const user = require("../controllers/user.controller");
+const tweet = require("../controllers/tweet.controller");
+
 const { verifyToken } = require("../middlewares/verifyToken");
 const upload = require("../middlewares/uploadFile");
 
 // Normal routes
-router.post("/:id", user.getOne);
+router.get("/:username", user.getOne);
+router.get("/:username/tweets", tweet.getAll);
 router.get("/", user.getAll);
 
 // Protected Routes
