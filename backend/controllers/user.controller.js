@@ -232,11 +232,12 @@ exports.uploadImage = (req, res) => {
 
 //Register a new user
 exports.register = (req, res) => {
-  const { name, username, email, password } = req.body;
+  let { name, username, email, password } = req.body;
   if (!name || !username || !email || !password) return res.status(400).json({ error: "Please provide all fields." });
   if (!/\S+@\w+\.\w+(\.\w+)?/.test(email)) return res.status(400).json({ error: "Invalid email" });
   if (password.length < 8) return res.status(400).json({ error: "Password needs to be atleast 8 characters long" });
 
+  username = username.trim().replaceAll(" ", "_");
   //Hash the password with 10 rounds of salt
   bcrypt.hash(password, 10).then((hashedPassword) => {
     //Check if email already exists in database
@@ -261,7 +262,7 @@ exports.register = (req, res) => {
               .save()
               .then((data) => {
                 if (!data) return res.status(400).json({ error: "Something went wrong" });
-                return res.status(200).json({ message: "Registered successfully!" });
+                return res.status(200).json({ message: "Registered successfully!", username: username });
               })
               .catch((err) => {
                 return res.status(500).json({ error: `Server Error ${err}` });
