@@ -13,6 +13,9 @@
 .bg-main {
   background-color: var(--var-main-color) !important;
 }
+.bg-lightmain {
+  background-color: var(--var-lighthover-color) !important;
+}
 .bg-hover:hover {
   background-color: var(--var-hover-color) !important;
   color: white !important;
@@ -24,6 +27,11 @@
   background-color: var(--var-normalhover-color) !important;
 }
 .color-main {
+  color: var(--var-main-color) !important;
+}
+.bg-clear {
+  background-color: transparent !important;
+  border: 1px solid var(--var-main-color) !important;
   color: var(--var-main-color) !important;
 }
 
@@ -43,4 +51,10 @@ p {
 
 .form-control:focus {
   box-shadow: none !important;
+}
+
+@media screen and (max-width: 1024px) {
+  .home {
+    margin: 0 !important;
+  }
 }

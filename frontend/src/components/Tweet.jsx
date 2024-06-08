@@ -1,4 +1,4 @@
-import { Button, Image, NavLink } from "react-bootstrap";
+import { Button, Image } from "react-bootstrap";
 import "./Tweet.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRetweet, faHeart } from "@fortawesome/free-solid-svg-icons";
@@ -51,6 +51,7 @@ function Tweet({ tweet, handleLike, handleUnlike, handleRetweet, handleReply, ha
         {tweet.retweetBy.length > 0 && (
           <p className='text-secondary fst-italic'>
             <FontAwesomeIcon icon={faRetweet} /> Retweeted by {retweets}
+            {tweet.retweetBy.length > 1 && "..."}
           </p>
         )}
         <div className='d-flex justify-content-between '>

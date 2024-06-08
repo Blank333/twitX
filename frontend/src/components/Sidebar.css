@@ -2,3 +2,13 @@
 .nav-link:hover {
   background-color: var(--var-lighthover-color) !important;
 }
+
+.sidebar {
+  height: 100vh;
+}
+
+@media screen and (max-width: 1024px) {
+  .sidebar {
+    height: 100%;
+  }
+}

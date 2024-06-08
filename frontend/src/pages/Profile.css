@@ -1,0 +1,42 @@
+.user-profile-picture {
+  border-radius: 50%;
+  width: 180px !important;
+  height: 180px !important;
+  padding: 5px !important;
+  background-color: black;
+  position: absolute;
+  bottom: -90px;
+  left: 30px;
+  object-fit: cover;
+}
+
+.profile-header {
+  height: 250px;
+}
+
+.profile-info {
+  margin: 1vw !important;
+}
+
+.no-tweets {
+  width: 50%;
+}
+
+@media screen and (max-width: 1024px) {
+  .user-profile-picture {
+    width: 18vw !important;
+    height: 18vw !important;
+    bottom: -9vw;
+    left: 30px;
+  }
+  .profile-header {
+    height: 26vw !important;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .profile-info {
+    margin: 0.1vw !important;
+    padding: 0.1vw !important;
+  }
+}

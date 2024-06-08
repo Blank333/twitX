@@ -1,10 +1,8 @@
 import { Row } from "react-bootstrap";
 import Tweet from "./Tweet";
 import axios from "axios";
-import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-function Tweets() {
-  const [tweets, setTweets] = useState([]);
+function Tweets({ tweets, setTweets }) {
   const token = localStorage.getItem("token");
 
   const handleLike = (id, userID) => {
@@ -107,17 +105,6 @@ function Tweets() {
         toast.error(err?.response?.data?.error);
       });
   };
-
-  useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_API_URL}/tweet`, { headers: { Authorization: token } })
-      .then((res) => {
-        setTweets(res.data.message);
-      })
-      .catch((err) => {
-        toast.error(err?.response?.data?.error);
-      });
-  }, []);
 
   return (
     <>
