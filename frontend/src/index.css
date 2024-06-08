@@ -29,6 +29,9 @@
 .color-main {
   color: var(--var-main-color) !important;
 }
+.color-hover:hover {
+  color: var(--var-hover-color) !important;
+}
 .bg-clear {
   background-color: transparent !important;
   border: 1px solid var(--var-main-color) !important;

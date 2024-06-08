@@ -106,7 +106,7 @@ function Profile() {
       <div className='d-flex justify-content-end align-items-end py-3 profile-info'>
         {!loading ? (
           userInfo._id !== profileInfo._id ? (
-            userInfo.following.find((user) => user._id === profileInfo.id) ? (
+            userInfo.following.find((userId) => userId === profileInfo._id) ? (
               <Button className='bg-main bg-hover border-0' onClick={handleUnfollow}>
                 Unfollow
               </Button>

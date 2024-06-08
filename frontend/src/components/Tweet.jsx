@@ -55,7 +55,10 @@ function Tweet({ tweet, handleLike, handleUnlike, handleRetweet, handleReply, ha
           </p>
         )}
         <div className='d-flex justify-content-between '>
-          <Link to={`/${tweet.tweetedBy.username}`} className='d-flex gap-2 text-decoration-none text-dark'>
+          <Link
+            to={`/${tweet.tweetedBy.username}`}
+            className='d-flex flex-column flex-md-row gap-0 gap-md-2  text-decoration-none text-dark'
+          >
             <p className='tweet-user fw-bold'>{tweet.tweetedBy.name}</p>
             <p className='text-secondary '>@{tweet.tweetedBy.username}</p>
             <p className='text-secondary'>{new Date(tweet.createdAt).toUTCString().split(" ").slice(0, 4).join(" ")}</p>

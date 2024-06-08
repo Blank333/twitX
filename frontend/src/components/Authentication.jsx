@@ -1,13 +1,16 @@
 import { Button, Col, Container, Form, Image, Row } from "react-bootstrap";
 import "./Authentication.css";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import logo from "../assets/logo.png";
 function Authentication({ sideMessage, action, handleAction }) {
+  const [searchParams] = useSearchParams();
+  const username = searchParams.get("username");
+
   const [formInfo, setFormInfo] = useState({
     name: "",
-    username: "",
+    username: username || "",
     email: "",
     password: "",
   });
@@ -31,6 +34,9 @@ function Authentication({ sideMessage, action, handleAction }) {
     }
     if (id === "password" && value.length < 8) {
       setIsNotValid({ ...isNotValid, [id]: "Passwords needs to have atleast 8 characters" });
+    }
+    if (id === "username" && value.includes(" ")) {
+      setIsNotValid({ ...isNotValid, [id]: "Username should have no spaces (use _)" });
     }
 
     setFormInfo({ ...formInfo, [id]: value });
@@ -66,7 +72,13 @@ function Authentication({ sideMessage, action, handleAction }) {
                 <h2>Log In</h2>
                 <Form onSubmit={handleSubmit}>
                   <Form.Group className='mb-3'>
-                    <Form.Control type='text' placeholder='Username' id='username' onChange={handleChange} />
+                    <Form.Control
+                      type='text'
+                      placeholder='Username'
+                      id='username'
+                      onChange={handleChange}
+                      value={formInfo.username}
+                    />
                     <Form.Text hidden={!isNotValid.username} className='text-danger'>
                       {isNotValid.username}
                     </Form.Text>

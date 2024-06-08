@@ -12,7 +12,7 @@ function Regsiter() {
       .then((res) => {
         toast.success(res.data.message);
         setTimeout(() => {
-          window.location.href = "/login";
+          window.location.href = `/login?username=${res.data.username}`;
         }, 3000);
       })
       .catch((err) => {

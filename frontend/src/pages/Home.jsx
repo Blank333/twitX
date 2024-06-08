@@ -8,7 +8,10 @@ import { toast } from "react-toastify";
 function Home() {
   const [show, setShow] = useState(false);
   const [tweets, setTweets] = useState([]);
+  const [tweetId, setTweetId] = useState();
+
   const token = localStorage.getItem("token");
+
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_API_URL}/tweet`, { headers: { Authorization: token } })
@@ -19,6 +22,7 @@ function Home() {
         toast.error(err?.response?.data?.error);
       });
   }, []);
+
   return (
     <Container className='border-start border-end h-100'>
       <Row className='border-bottom py-2 position-sticky start-0 top-0 bg-white d-flex align-items-center'>
@@ -31,9 +35,9 @@ function Home() {
           </Button>
         </Col>
       </Row>
-      <Tweets tweets={tweets} setTweets={setTweets} />
+      <Tweets tweets={tweets} setTweets={setTweets} setReply={setShow} setTweetId={setTweetId} />
 
-      <TweetModal onHide={() => setShow(false)} show={show} action={show} />
+      <TweetModal onHide={() => setShow(false)} show={show} id={tweetId} />
     </Container>
   );
 }

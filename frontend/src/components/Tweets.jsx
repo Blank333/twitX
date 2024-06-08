@@ -2,7 +2,7 @@ import { Row } from "react-bootstrap";
 import Tweet from "./Tweet";
 import axios from "axios";
 import { toast } from "react-toastify";
-function Tweets({ tweets, setTweets }) {
+function Tweets({ tweets, setTweets, setReply, setTweetId }) {
   const token = localStorage.getItem("token");
 
   const handleLike = (id, userID) => {
@@ -71,26 +71,9 @@ function Tweets({ tweets, setTweets }) {
       });
   };
 
-  const handleReply = (id, userID) => {
-    console.log("reply");
-    // axios
-    //       .post(`${import.meta.env.VITE_API_URL}/tweet/${id}/dislike`, {}, { headers: { Authorization: token } })
-    //       .then((res) => {
-    //         toast.success(res.data.message);
-    //         // Update likes in the state variable
-    //         setTweets(
-    //           tweets.map((tweet) => {
-    //             if (tweet._id === id) {
-    //               const updatedLikes = tweet.likes.filter((like) => like._id !== userID);
-    //               return { ...tweet, likes: updatedLikes };
-    //             }
-    //             return tweet;
-    //           })
-    //         );
-    //       })
-    //       .catch((err) => {
-    //         toast.error(err?.response?.data?.error);
-    //       });
+  const handleReply = (id) => {
+    setTweetId(id);
+    setReply("Reply");
   };
 
   const handleDelete = (id) => {

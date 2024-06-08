@@ -4,6 +4,8 @@
 
 .content-media {
   max-width: 90%;
+  max-height: 100vh;
+  object-fit: contain;
 }
 
 .delete-tweet {
@@ -16,4 +18,10 @@
 
 .tweet-user:hover {
   text-decoration: underline;
+}
+
+@media screen and (max-width: 1024px) {
+  .delete-tweet {
+    visibility: visible;
+  }
 }
