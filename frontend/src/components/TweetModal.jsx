@@ -13,8 +13,8 @@ function TweetModal({ show = false, onHide, id = null }) {
   const [loading, setLoading] = useState(false);
 
   const handleTweet = () => {
-    setLoading(true);
     if (!content) return toast.error("Please provide tweet content!");
+    setLoading(true);
 
     // Save tweet info in form data for submission
     const formdata = new FormData();
