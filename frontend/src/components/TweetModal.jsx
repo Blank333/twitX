@@ -15,10 +15,13 @@ function TweetModal({ show = false, onHide, id = null }) {
   const handleTweet = () => {
     setLoading(true);
     if (!content) return toast.error("Please provide tweet content!");
+
+    // Save tweet info in form data for submission
     const formdata = new FormData();
     formdata.append("image", image);
     formdata.append("content", content);
 
+    // Different requests for new tweet or reply
     if (show === "Reply") {
       axios
         .post(`${import.meta.env.VITE_API_URL}/tweet/${id}/reply`, formdata, { headers: { Authorization: token } })

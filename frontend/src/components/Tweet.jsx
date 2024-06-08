@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 
 function Tweet({ tweet, handleLike, handleUnlike, handleRetweet, handleReply, handleDelete }) {
   const userInfo = useSelector((state) => state.user);
+  // Set the names of the people who retweeted (upto 3)
   const retweets =
     tweet.retweetBy.length === 1
       ? tweet.retweetBy[0].username
@@ -85,6 +86,7 @@ function Tweet({ tweet, handleLike, handleUnlike, handleRetweet, handleReply, ha
 
         {/* Likes/Retweets*/}
         <div className='d-flex gap-4'>
+          {/* Likes */}
           <Button
             variant='clear'
             className='d-flex align-items-center bg-normalhover'
@@ -97,6 +99,8 @@ function Tweet({ tweet, handleLike, handleUnlike, handleRetweet, handleReply, ha
             />
             <span>{tweet.likes.length}</span>
           </Button>
+
+          {/* Replies */}
           <Button
             variant='clear'
             className='d-flex align-items-center bg-normalhover'
@@ -106,6 +110,8 @@ function Tweet({ tweet, handleLike, handleUnlike, handleRetweet, handleReply, ha
             <FontAwesomeIcon icon={faMessageRegular} className='text-primary pe-1 fs-5' />
             <span>{tweet.replies.length}</span>
           </Button>
+
+          {/* Retweets */}
           <Button
             variant='clear'
             className='d-flex align-items-center bg-normalhover'

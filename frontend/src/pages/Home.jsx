@@ -16,6 +16,7 @@ function Home() {
 
   useEffect(() => {
     setLoading(true);
+    // Fetch all tweets
     axios
       .get(`${import.meta.env.VITE_API_URL}/tweet`, { headers: { Authorization: token } })
       .then((res) => {

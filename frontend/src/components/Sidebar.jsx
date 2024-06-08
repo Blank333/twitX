@@ -17,6 +17,7 @@ function Sidebar() {
   const userInfo = useSelector((state) => state.user);
   const token = localStorage.getItem("token");
 
+  // On logout remove token and redirect user to login page
   const handleLogout = () => {
     localStorage.removeItem("token");
     toast.success("Logged out", { autoClose: 500 });
@@ -26,6 +27,7 @@ function Sidebar() {
   };
 
   useEffect(() => {
+    // Update redux store
     if (token && !userInfo.token) {
       axios
         .get(`${import.meta.env.VITE_API_URL}/auth`, { headers: { Authorization: token } })
@@ -87,6 +89,8 @@ function Sidebar() {
             </Link>
           </Col>
         </Row>
+
+        {/* Sidebar */}
 
         <Offcanvas show={show} onHide={() => setShow(false)}>
           <Offcanvas.Header>

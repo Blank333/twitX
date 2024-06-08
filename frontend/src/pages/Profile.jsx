@@ -30,8 +30,9 @@ function Profile() {
 
   useEffect(() => {
     setLoading(true);
+    // Fetch user profile
     axios
-      .get(`${import.meta.env.VITE_API_URL}/user/${username}`)
+      .get(`${import.meta.env.VITE_API_URL}/user/${username}`, { headers: { Authorization: token } })
       .then((res) => {
         setProfileInfo(res.data.message);
       })
@@ -39,6 +40,7 @@ function Profile() {
         toast.error(err?.response?.data?.error);
       });
 
+    // Fetch user tweets
     axios
       .get(`${import.meta.env.VITE_API_URL}/user/${username}/tweets`, { headers: { Authorization: token } })
       .then((res) => {
@@ -107,6 +109,7 @@ function Profile() {
       {/* Actions */}
       <div className='d-flex justify-content-end align-items-end py-3 profile-info'>
         {!loading ? (
+          // When visint other profiles
           userInfo._id !== profileInfo._id ? (
             userInfo.following.find((userId) => userId === profileInfo._id) ? (
               <Button className='bg-main bg-hover border-0' onClick={handleUnfollow}>
@@ -118,7 +121,9 @@ function Profile() {
               </Button>
             )
           ) : (
+            // When on own profile
             <div className='d-flex flex-column flex-md-row gap-3'>
+              {/* Upload Profile Picture */}
               <Button className='bg-clear bg-hover' onClick={() => setShowUpload(true)}>
                 Upload Profile Photo
               </Button>
@@ -129,6 +134,7 @@ function Profile() {
                 setUserInfo={setProfileInfo}
               />
 
+              {/* Edit Profile Information */}
               <Button className='bg-clear bg-hover' onClick={() => setShowEdit(true)}>
                 Edit Profile
               </Button>
@@ -181,6 +187,8 @@ function Profile() {
               </p>
             </Col>
           </Row>
+
+          {/* Followers/Following */}
           <Row>
             <Col className='d-flex gap-3 align-items-center'>
               <Button variant='clear' onClick={() => setShowFollows("Following")}>
@@ -200,6 +208,7 @@ function Profile() {
         </>
       )}
 
+      {/* User Tweets */}
       {!loading && tweets.length ? (
         <Row>
           <h4 className='text-center'>Tweets and replies</h4>

@@ -7,6 +7,7 @@ import Profile from "./pages/Profile";
 import TweetDetails from "./pages/TweetDetails";
 
 const router = createBrowserRouter([
+  // Main
   {
     path: "/",
     element: <App />,
@@ -25,6 +26,7 @@ const router = createBrowserRouter([
       },
     ],
   },
+  // Authentication
   {
     path: "/login",
     element: <Login />,

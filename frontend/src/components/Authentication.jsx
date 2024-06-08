@@ -4,7 +4,9 @@ import { Link, useSearchParams } from "react-router-dom";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import logo from "../assets/logo.png";
-function Authentication({ sideMessage, action, handleAction }) {
+import StyledLoading from "./StyledLoading";
+
+function Authentication({ sideMessage, action, handleAction, loading }) {
   const [searchParams] = useSearchParams();
   const username = searchParams.get("username");
 
@@ -66,9 +68,12 @@ function Authentication({ sideMessage, action, handleAction }) {
           </div>
         </Col>
         <Col sm={12} md={6} className='d-flex flex-column justify-content-center ps-5 gap-3 '>
+          {/* Login form */}
           {action === "Login" ? (
             <>
               <div>
+                {loading && <StyledLoading />}
+
                 <h2>Log In</h2>
                 <Form onSubmit={handleSubmit}>
                   <Form.Group className='mb-3'>
@@ -102,7 +107,10 @@ function Authentication({ sideMessage, action, handleAction }) {
             </>
           ) : (
             <>
+              {/* Register Form */}
               <div>
+                {loading && <StyledLoading />}
+
                 <h2>Register</h2>
                 <Form onSubmit={handleSubmit}>
                   <Form.Group className='mb-3'>

@@ -16,6 +16,7 @@ function EditProfileModal({ show, onHide, userInfo, setUserInfo }) {
 
   const handleEdit = (e) => {
     e.preventDefault();
+    // Validate form
     if (!formInfo.name || !formInfo.location || !formInfo.dateOfBirth) {
       return toast.error("Fill all fields before saving!");
     }
@@ -29,6 +30,7 @@ function EditProfileModal({ show, onHide, userInfo, setUserInfo }) {
       )
       .then((res) => {
         toast.success(res.data.message);
+        // Get the updatedFields from the backend and set the state variable for dynamic updates
         const { updatedFields } = res.data;
         setUserInfo({
           ...userInfo,

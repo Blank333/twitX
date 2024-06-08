@@ -4,6 +4,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 function Tweets({ tweets, setTweets, setReply, setTweetId }) {
   const token = localStorage.getItem("token");
+
   const handleLike = (id, userID) => {
     axios
       .post(`${import.meta.env.VITE_API_URL}/tweet/${id}/like`, {}, { headers: { Authorization: token } })
@@ -72,6 +73,7 @@ function Tweets({ tweets, setTweets, setReply, setTweetId }) {
       });
   };
 
+  // Replying is handled in the modal
   const handleReply = (id) => {
     setTweetId(id);
     setReply("Reply");

@@ -6,6 +6,7 @@ import { ToastContainer } from "react-toastify";
 
 function App() {
   const token = localStorage.getItem("token");
+  // If not authenticated go back to login
   useEffect(() => {
     if (!token) {
       window.location.href = "/login";

@@ -19,9 +19,11 @@ function TweetDetails() {
   useEffect(() => {
     setLoading(true);
 
+    // Fetch tweet info and it's replies
     axios
       .get(`${import.meta.env.VITE_API_URL}/tweet/${id}`, { headers: { Authorization: token } })
       .then((res) => {
+        // Setting tweet inside an array because of how the Tweets component works
         setTweet([res.data.message]);
         setReplies(res.data.message.replies);
       })
