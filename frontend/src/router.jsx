@@ -5,12 +5,14 @@ import Regsiter from "./pages/Register";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import TweetDetails from "./pages/TweetDetails";
+import ErrorPage from "./pages/ErrorPage";
 
 const router = createBrowserRouter([
   // Main
   {
     path: "/",
     element: <App />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "",

@@ -38,6 +38,9 @@ function Profile() {
       })
       .catch((err) => {
         toast.error(err?.response?.data?.error);
+        setTimeout(() => {
+          window.location.href = "/";
+        }, 3000);
       });
 
     // Fetch user tweets
