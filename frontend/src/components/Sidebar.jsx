@@ -92,7 +92,11 @@ function Sidebar() {
           <Offcanvas.Header>
             <Offcanvas.Title className=' w-100'>
               <div className='d-flex justify-content-between align-items-start'>
-                <Link to={`/${userInfo.username}`} className='d-flex flex-column  text-decoration-none text-dark'>
+                <Link
+                  to={`/${userInfo.username}`}
+                  className='d-flex flex-column  text-decoration-none text-dark'
+                  onClick={() => setShow(false)}
+                >
                   <Image
                     src={userInfo.profilePicURL}
                     alt='profile picture'
@@ -111,13 +115,18 @@ function Sidebar() {
           </Offcanvas.Header>
           <Offcanvas.Body>
             <Nav className='d-flex flex-column gap-1 mt-2' variant='pills'>
-              <NavLink to='/' className='d-flex gap-2 align-items-center rounded-5 text-dark nav-link'>
+              <NavLink
+                to='/'
+                className='d-flex gap-2 align-items-center rounded-5 text-dark nav-link'
+                onClick={() => setShow(false)}
+              >
                 <FontAwesomeIcon icon={faHome} />
                 <span>Home</span>
               </NavLink>
               <NavLink
                 to={`/${userInfo.username}`}
                 className='d-flex gap-2 align-items-center rounded-5 text-dark nav-link'
+                onClick={() => setShow(false)}
               >
                 <FontAwesomeIcon icon={faUser} />
                 <span>Profile</span>
