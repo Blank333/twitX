@@ -4,8 +4,6 @@ const tweet = require("../controllers/tweet.controller");
 const { verifyToken } = require("../middlewares/verifyToken");
 const upload = require("../middlewares/uploadFile");
 
-// Normal routes
-
 // Protected Routes
 router.use(verifyToken);
 router.get("/", tweet.getAll);
