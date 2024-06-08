@@ -31,6 +31,7 @@ const userSchema = mongoose.Schema(
     },
     profilePicURL: {
       type: String,
+      default: "",
     },
     location: {
       type: String,
