@@ -150,7 +150,15 @@ exports.getOne = (req, res) => {
   // Populate and remove password
   Tweet.findById(id)
     .populate({
-      path: "replies likes retweetBy tweetedBy",
+      path: "replies",
+      populate: {
+        path: "tweetedBy likes retweetBy",
+        select: "-password",
+      },
+      select: "-password",
+    })
+    .populate({
+      path: "likes tweetedBy retweetBy",
       select: "-password",
     })
     .then((data) => {
